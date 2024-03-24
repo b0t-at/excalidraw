@@ -14,7 +14,7 @@ ENV VITE_APP_WS_SERVER_URL=${VITE_APP_WS_SERVER_URL}
 
 WORKDIR /opt/node_app
 
-#COPY --from=download /opt/node_app/excalidraw/package.json /opt/node_app/excalidraw/yarn.lock ./
+COPY package.json yarn.lock ./
 RUN yarn --ignore-optional --network-timeout 600000
 
 #COPY --from=download /opt/node_app/excalidraw/ .
