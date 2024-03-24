@@ -1,0 +1,37 @@
+name: excalidraw-stack Image
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - b0t-main
+env:
+  IMAGE_BASE_TAG: git.b0t.at/b0t-at/excalidraw-stack
+
+jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.branch }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ vars.registry_uri }}
+          username: ${{ secrets.registry_username }}
+          password: ${{ secrets.registry_password }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: b0t.Dockerfile
+          push: true
+          tags: ${{ env.IMAGE_BASE_TAG }}:latest
+          build-args: |
+            PUB_SRV_NAME=${{ vars.Base_URL }}
+            PUB_SRV_NAME_WS=ws.${{ vars.Base_URL }}
+            VITE_APP_BACKEND_V2_GET_URL=https://${{ vars.Base_URL }}/api/v2/scenes/
+            VITE_APP_BACKEND_V2_POST_URL=https://${{ vars.Base_URL }}/api/v2/scenes/
+            VITE_APP_WS_SERVER_URL=https://ws.${{ vars.Base_URL }}/

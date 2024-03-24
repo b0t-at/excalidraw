@@ -1,10 +1,10 @@
 FROM node:21-alpine AS build
 
-ARG PUB_SRV_NAME=draw.b0t.at
-ARG PUB_SRV_NAME_WS=ws.draw.b0t.at
-ARG VITE_APP_BACKEND_V2_GET_URL=https://draw.b0t.at/api/v2/scenes/
-ARG VITE_APP_BACKEND_V2_POST_URL=https://draw.b0t.at/api/v2/scenes/
-ARG VITE_APP_WS_SERVER_URL=https://ws.draw.b0t.at/
+ARG PUB_SRV_NAME=draw.mydomain.com
+ARG PUB_SRV_NAME_WS=ws.draw.mydomain.com
+ARG VITE_APP_BACKEND_V2_GET_URL=https://draw.mydomain.com/api/v2/scenes/
+ARG VITE_APP_BACKEND_V2_POST_URL=https://draw.mydomain.com/api/v2/scenes/
+ARG VITE_APP_WS_SERVER_URL=https://ws.draw.mydomain.com/
 
 ENV PUB_SRV_NAME=${PUB_SRV_NAME}
 ENV PUB_SRV_NAME_WS=${PUB_SRV_NAME_WS}
