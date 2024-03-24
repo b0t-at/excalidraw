@@ -17,6 +17,8 @@ WORKDIR /opt/node_app
 COPY package.json yarn.lock ./
 RUN yarn --ignore-optional --network-timeout 600000
 
+RUN npm install cross-env
+
 #COPY --from=download /opt/node_app/excalidraw/ .
 RUN yarn build:app:docker
 
